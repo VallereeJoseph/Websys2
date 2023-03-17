@@ -19,10 +19,19 @@ class StudentController extends Controller
         // SELECT * FROM students
         // through query builder
         //$students =DB::table('students')->get();//this selects all data from student table
-        $students = student::all(); //same concept as the code above (this is shorter version)
+        //$students = student::all(); //same concept as the code above (this is shorter version)
+        $students = DB::table('students')
+                        ->join('courses','students.course_id','=','courses.id')
+                        ->select('students.*','courses.*','students.id as student_pk')
+                        ->get();
+        $age_sum = DB::table('students')
+                        ->where('Age','>',18)
+                        ->sum('Age');
 
-
-        return view('students.students_list', compact('students')); //displays student page and to connect $students using compact
+        
+                        
+        //$students = student::where('Age','>','18')->count();
+        return view('students.students_list', compact('students','age_sum')); //displays student page and to connect $students using compact
         //return view('students.students_list', ['$students' => $students]); //another way to call the $students through array and display
 
     }
@@ -71,7 +80,8 @@ class StudentController extends Controller
      */
     public function edit(student $student)
     {
-        //
+        $courses = course::all();
+        return view('students.students_edit', compact('student','courses'));
     }
 
     /**

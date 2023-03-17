@@ -10,14 +10,14 @@
         <br>
         <input type="text" class="form-control" name="LastName" id="LastName" placeholder="Last Name" aria-label="Last name">
         <br>
-        <input type="text" class="form-control" name="MiddleName" id="MiddleName"placeholder="Middle Name" aria-label="Middle Name">
+        <input type="text" class="form-control" name="MiddleName" id="MiddleName" placeholder="Middle Name" aria-label="Middle Name">
         <br>
         <input type="number" class="form-control" name="Age" id="Age" placeholder="Age" aria-label="Age">
         <br>
         <select name="course_id" id="course_id" class="form-select" aria-label="Default select example">
             <option selected>Course</option>
             @foreach($courses AS $course)
-                <option value= "{{$course->id}}" >{{$course->CourseCode}}</option>
+                <option value= "{{$course->id}}">{{$course->CourseCode}}</option>
             @endforeach
         </select>
         <button class="btn btn-outline-secondary" type="submit" >Submit</button>

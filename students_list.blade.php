@@ -2,8 +2,9 @@
 @section('title','students list')
 @section('content')
 
-<div class="table-responsive">
 
+<a class="btn btn-primary" href="{{ route('students.create') }}" >Add Student</a>
+<div class="table-responsive">
     <table class="table table-striped
     table-hover	
     table-borderless
@@ -12,6 +13,7 @@
         <thead class="table-light">
             <caption>Student Lists</caption>
             <tr>
+                <th>PK ID</th>
                 <th>Student ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -23,6 +25,7 @@
             <tbody class="table-group-divider">
             @foreach($students AS $student) 
                 <tr class="table-primary" >
+                    <td>{{$student->student_pk}}</td>
                     <td>{{$student->StudentID}}</td>
                     <td>{{$student->FirstName}}</td>
                     <td>{{$student->LastName}}</td>
@@ -30,12 +33,15 @@
                     <td>{{$student->Age}}</td>
                     <td>{{$student->CourseCode}}</td>
                 </tr>
-            @endforeach  
+                <td>
+                    <a href="{{ route('students.edit', $student->student_pk) }}" class="btn btn-success">Edit</a>
+                    <a href="" class="btn btn-danger">Delete</a>
+                </td>        
+            @endforeach 
             </tbody>
-            <tfoot>
-                
-            </tfoot>
+            
     </table>
+    <p>Sum of Ages > 18 = {{$age_sum}}</p> 
 </div>
 
 @endsection
